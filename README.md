@@ -1,10 +1,19 @@
-#![cfg_attr(
-    all(not(debug_assertions), target_os = "windows"),
-    windows_subsystem = "windows"
-)]
+Hello Tauri App
+---
 
-use tauri::Manager;
+## Usage
 
+```
+yarn build
+
+# build tauri
+yarn tauri build
+```
+
+
+Add Splashscreen
+
+```rust
 fn main() {
     tauri::Builder::default()
         .setup(|app| {
@@ -26,3 +35,43 @@ fn main() {
         .run(tauri::generate_context!())
         .expect("failed to run app");
 }
+```
+
+Create `/splashscreen` page with React Router
+
+Main
+
+```jsx
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
+```
+
+App
+
+```jsx
+<Routes>
+  <Route path="/" element={<HomePage />} />
+  <Route path="splashscreen" element={<SplashScreenPage />} />
+</Routes>
+```
+
+Preview with tauri
+
+```
+yarn tauri dev
+```
+
+Build app
+
+```
+yarn tauri build
+```
+
+build image located in `src-tauri/target/release/bundle/macos/hello-tauri-app.app`
+
+Try it out!
